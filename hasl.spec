@@ -6,26 +6,26 @@
 Summary:	Hassle free SASL client library
 Summary(pl.UTF-8):	Bezproblemowa biblioteka klienta SASL
 Name:		hasl
-Version:	0.3.1
+Version:	0.4.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.xz
-# Source0-md5:	d049693ba174a7ebf03cd8144389904a
+# Source0-md5:	74d7ac0cb88a5ca2e084776bff4057c0
 URL:		https://keep.imfreedom.org/hasl/hasl/
 # C17
 BuildRequires:	gcc >= 6:7
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
-BuildRequires:	glib2-devel >= 1:2.70
+BuildRequires:	glib2-devel >= 1:2.76
 BuildRequires:	libidn-devel >= 1.38
 BuildRequires:	meson >= 0.58.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.029
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.70
+Requires:	glib2 >= 1:2.76
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,7 +40,7 @@ Summary:	Header files for hasl library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki hasl
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.70
+Requires:	glib2-devel >= 1:2.76
 Requires:	libidn-devel >= 1.38
 
 %description devel
@@ -77,16 +77,16 @@ Dokumentacja API biblioteki hasl.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	%{!?with_static_libs:--default-library=shared} \
 	%{!?with_apidocs:-Ddocs=false}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 install -d $RPM_BUILD_ROOT%{_gidocdir}
 %{__mv} $RPM_BUILD_ROOT%{_docdir}/hasl $RPM_BUILD_ROOT%{_gidocdir}
