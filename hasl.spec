@@ -6,19 +6,19 @@
 Summary:	Hassle free SASL client library
 Summary(pl.UTF-8):	Bezproblemowa biblioteka klienta SASL
 Name:		hasl
-Version:	0.4.0
+Version:	0.5.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/pidgin/%{name}-%{version}.tar.xz
-# Source0-md5:	74d7ac0cb88a5ca2e084776bff4057c0
+# Source0-md5:	73ee0432d3933e709782516cca0f67af
 URL:		https://keep.imfreedom.org/hasl/hasl/
 # C17
 BuildRequires:	gcc >= 6:7
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
 BuildRequires:	glib2-devel >= 1:2.76
 BuildRequires:	libidn-devel >= 1.38
-BuildRequires:	meson >= 0.58.0
+BuildRequires:	meson >= 1.1.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
@@ -104,13 +104,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README.md
-%attr(755,root,root) %{_libdir}/libhasl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libhasl.so.0
+%{_libdir}/libhasl.so.*.*.*
+%ghost %{_libdir}/libhasl.so.0
 %{_libdir}/girepository-1.0/Hasl-1.0.typelib
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libhasl.so
+%{_libdir}/libhasl.so
 %{_includedir}/hasl-1.0
 %{_datadir}/gir-1.0/Hasl-1.0.gir
 %{_pkgconfigdir}/hasl.pc
